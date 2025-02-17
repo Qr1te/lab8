@@ -3,17 +3,20 @@
 
 void setNumber(int* number)
 {
-    int i = 0;
+    int i = 0, hasnegative = 1;
     *number = 0;
     char digits[256];
     scanf("%s", digits);
+    if(digits[0] == '-') hasnegative = -1;
     do {
+
         if (digits[i] < '0' || digits[i] > '9') {
             puts("Invalid input. Try again");
             fflush(stdin); setNumber(number);  break;
         }
         else { *number = *number * 10 + digits[i] - '0'; }
     } while(digits[++i] != 0);
+    *number*=hasnegative;
 
 }
 char Try_answer() {
@@ -32,7 +35,7 @@ void nameFile(char **filename, int n_arg, char *arg[])
     char bin[5] = ".bin" ; bin[4] ='\0';
     if (n_arg > 1){
        *filename = (char*)malloc(sizeof(arg[1]));
-        *filename = arg[1];
+       *filename = arg[1];
     }
     else {
         *filename = (char*)malloc(sizeof(char)*24);

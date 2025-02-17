@@ -4,9 +4,7 @@
 
 int main(int n_arg, char *arg[]) {
 
-    char *filename;
-    nameFile(&filename,n_arg, arg);
-
+    char *filename, *filename1;
     srand(time(0));
     int ans;
     do {
@@ -16,10 +14,10 @@ int main(int n_arg, char *arg[]) {
         setNumber(&ans);
         fflush(stdin);
         switch(ans) {
-            case 1: task1(filename); break;
-            case 2: task2(filename); break;
-            case 3: task3(); break;
-            case 4: task4(); break;
+            case 1: nameFile(&filename,n_arg, arg); task1(filename); break;
+            case 2: nameFile(&filename,n_arg, arg); task2(filename); break;
+            case 3: nameFile(&filename1, n_arg, arg); task3(filename, filename1); break;
+            case 4: nameFile(&filename1, n_arg, arg); task4(filename, filename1); break;
             default: puts("Task number must be from 1 to 4!"); break;
         }
         puts("Do you want to try again?(y/n)");

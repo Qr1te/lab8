@@ -9,5 +9,5 @@
 
 void task1(char *filename);
 void task2(char *filename);
-void task3();
-void task4();
+void task3(char *filename1, char *filename2);
+void task4(char *filename1, char *filename2);
