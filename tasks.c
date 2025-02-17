@@ -1,6 +1,4 @@
-//
-// Created by Asus Tuf on 16.02.2025.
-//
+
 #include "funcs.h"
 #include "tasks.h"
 void task1(char *filename){
