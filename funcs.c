@@ -27,7 +27,7 @@ char Try_answer() {
     fflush(stdin);
     return answer;
 }
-void initFile(char **filename, int n_arg, char *arg[])
+void nameFile(char **filename, int n_arg, char *arg[])
 {
     char bin[5] = ".bin" ; bin[4] ='\0';
     if (n_arg > 1){
@@ -133,7 +133,6 @@ void sortBinaryFile(const char *filename) {
     int num2;
     for(int i = 0;i < n-1; ++i)
     {
-
         for(int j = i + 1; j<n; ++j)
         {
             readNum(&file, i, &num1);
@@ -145,10 +144,9 @@ void sortBinaryFile(const char *filename) {
     int *h = (int*) malloc(n *sizeof(int));
     rewind(file);
     fread(h, sizeof(int),n, file);
-    for(int i = 0; i < n; i++){
-
+    for(int i = 0; i < n; i++)
+    {
         printf("%d ", h[i]);
-
     }
     printf("\n");
     free(h);

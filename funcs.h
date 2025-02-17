@@ -12,7 +12,7 @@
 #include <string.h>
 char Try_answer();
 void setNumber(int *number);
-void initFile(char **filename, int n_arg, char *arg[]);
+void nameFile(char **filename, int n_arg, char *arg[]);
 void fillFile(char *filename);
 void countNumbers(const char *filename);
 void readNum(FILE **file, int pos, int *num);
