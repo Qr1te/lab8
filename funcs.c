@@ -78,24 +78,16 @@ void fillFile(char *filename){
 void countNumbers(const char *filename){
 
     FILE *fp = fopen(filename, "rb");
-    int n = 1;
-    int *array = (int *)malloc(n * sizeof(int));
+    int count = 0, sum = 0, num;
+    fread(&sum, sizeof(int), 1, fp);
+    while (fread(&num, sizeof(int), 1, fp) != 0) {
+        if (num > sum){ count++;}
 
-    while(fread(array, sizeof(int), n, fp) != 0){
-    fread(array, sizeof(int), n, fp);
-    array = (int*) realloc(array, ++n * sizeof(int));
+        sum += num;
     }
+    printf("count of elements which more then sum of previous is %d \n", count);
 
     fclose(fp);
-
-    int count = 0, sum = 0;
-    for (int i = 0; i < n; i++) {
-        sum += array[i];
-        if (array[i+1] > sum ) count++;
-    }
-
-    printf("count of elements which more then sum of previous is n%d \n", count);
-    free(array);
 }
 void readNum(FILE **file, int pos, int *num)
 {
