@@ -30,24 +30,19 @@ char Try_answer() {
     fflush(stdin);
     return answer;
 }
-void nameFile(char **filename, int n_arg, char *arg[])
+
+void nameFile(char **filename, char **filename1,int n_arg, char *arg[])
 {
     char bin[5] = ".bin" ; bin[4] ='\0';
     if (n_arg > 1){
-       *filename = (char*)malloc(sizeof(arg[1]));
-       *filename = arg[1];
+        *filename = (char*)malloc(sizeof(arg[1]));
+        *filename = arg[1];
+        *filename1 = (char*)malloc(sizeof(arg[2]));
+        *filename1 = arg[2];
     }
-    else {
-        *filename = (char*)malloc(sizeof(char)*24);
 
-        printf("Enter file name: ");
-        if (!fgets(*filename, 20, stdin)){
-            printf("\nWrong file name");
-            exit(1);
-        }
-        (*filename)[strlen(*filename)-1] = '\0';
-    }
     *filename = strcat(*filename,bin);
+    *filename1 = strcat(*filename1,bin);
 }
 
 void fillFile(char *filename){
@@ -70,7 +65,7 @@ void fillFile(char *filename){
     fclose(fp);
     printf("File has been written\n");
 
-    fopen(filename, "rb");
+    fp = fopen(filename, "rb");
     int array[n];
     fread(array, sizeof(int),n,fp);
     for(int i = 0; i < n; i++){
@@ -78,6 +73,7 @@ void fillFile(char *filename){
 
     }
     printf("\n");
+    fclose(fp);
 }
 void countNumbers(const char *filename){
 
@@ -98,7 +94,7 @@ void countNumbers(const char *filename){
         if (array[i+1] > sum ) count++;
     }
 
-    printf("%d \n", count);
+    printf("count of elements which more then sum of previous is n%d \n", count);
     free(array);
 }
 void readNum(FILE **file, int pos, int *num)
@@ -147,6 +143,7 @@ void sortBinaryFile(const char *filename) {
     int *h = (int*) malloc(n *sizeof(int));
     rewind(file);
     fread(h, sizeof(int),n, file);
+    printf("Sorted file:\n");
     for(int i = 0; i < n; i++)
     {
         printf("%d ", h[i]);
@@ -170,12 +167,12 @@ void mergeTheFile(const char *filename1, const char *filename2){
         fread(&input1, sizeof(int), 1, file1);
         fread(&input2, sizeof(int), 1, file2);
         for(int i = 0, j = 0; i < size1 || j < size2;) {
-            if (i < size && (input1 > input2 || j == size2)) {
+            if (i < size1 && (input1 > input2 || j == size2)) {
                 fwrite(&input1, sizeof(int), 1, fileBoth);
                 fread(&input1, sizeof(int), 1, file1);
                 i++;
             }
-            else if (j != size) {
+            else if (j < size2) {
                 fwrite(&input2, sizeof(int), 1, fileBoth);
                 fread(&input2, sizeof(int), 1, file2);
                 j++;
@@ -183,6 +180,7 @@ void mergeTheFile(const char *filename1, const char *filename2){
         }
 
         fseek(fileBoth, 0, SEEK_SET);
+        printf("Merged file:");
         for (int i = 0; i < size; ++i) {
             int input;
             fread(&input, sizeof(int), 1, fileBoth);
